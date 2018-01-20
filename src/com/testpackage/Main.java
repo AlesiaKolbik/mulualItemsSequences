@@ -23,11 +23,24 @@ public class Main {
 
     private static String[] findMutualItems(String[] array, String[] array2) {
         String mutualItems="";
+        int j=0;
         for(int i=0;i<array.length;i++){
-            for(int j=0;j<array2.length;j++){
-                if(array[i].equals(array2[j])){
-                    mutualItems+=array[i]+" ";
+            if(array[i].equals(array2[j])) {
+                mutualItems += array[i] + " ";
+                j++;
+                if(j==array2.length){
+                    break;
                 }
+            }
+            if(Integer.parseInt(array[i])>Integer.parseInt(array2[j])) {
+                j++;
+                i--;
+                if(j==array2.length){
+                    break;
+                }
+            }
+            if(Integer.parseInt(array[i])<Integer.parseInt(array2[j])) {
+                continue;
             }
         }
         String[] result=mutualItems.split(" ");
