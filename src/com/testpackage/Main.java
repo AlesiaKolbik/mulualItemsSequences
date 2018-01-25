@@ -7,53 +7,48 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner scanner=new Scanner(System.in);
-        System.out.println("Введите числа для первой последовательности:");
+        System.out.println("Введите числа для  последовательностей:");
         String input=scanner.nextLine();
+        String inputTwo=scanner.nextLine();
         String [] groupElements=input.split(" ");
-        Scanner scanner2=new Scanner(System.in);
-        System.out.println("Введите числа для второй последовательности:");
-        String input2=scanner2.nextLine();
-        String [] groupElements2=input2.split(" ");
-        String [] mutualItems=findMutualItems(groupElements,groupElements2);
+        String [] groupElements2=inputTwo.split(" ");
+        StringBuilder mutualItems=findMutualItems(groupElements,groupElements2);
         print(mutualItems);
         printNumbersOfCoincidences(mutualItems);
     }
 
 
 
-    private static String[] findMutualItems(String[] array, String[] array2) {
-        String mutualItems="";
+    private static StringBuilder findMutualItems(String[] array, String[] secondArray) {
+        StringBuilder result=new StringBuilder();
         int j=0;
         for(int i=0;i<array.length;i++){
-            if(array[i].equals(array2[j])) {
-                mutualItems += array[i] + " ";
+            if(array[i].equals(secondArray[j])) {
+                result.append(array[i]);
                 j++;
-                if(j==array2.length){
+                if(j==secondArray.length){
                     break;
                 }
             }
-            if(Integer.parseInt(array[i])>Integer.parseInt(array2[j])) {
+            if(Integer.parseInt(array[i])>Integer.parseInt(secondArray[j])) {
                 j++;
                 i--;
-                if(j==array2.length){
+                if(j==secondArray.length){
                     break;
                 }
             }
-            if(Integer.parseInt(array[i])<Integer.parseInt(array2[j])) {
+            if(Integer.parseInt(array[i])<Integer.parseInt(secondArray[j])) {
                 continue;
             }
         }
-        String[] result=mutualItems.split(" ");
         return result;
     }
 
-    private static void print(String[] array) {
-        for(int i=0;i<array.length;i++){
-            System.out.print(array[i]+" ");
+    private static void print(StringBuilder array) {
+            System.out.print(array);
         }
-    }
 
-    private static void printNumbersOfCoincidences(String[] array) {
-        System.out.println("\n Количество совпадений равно: "+array.length);
+    private static void printNumbersOfCoincidences(StringBuilder array) {
+        System.out.println("\n Количество совпадений равно: "+array.length());
     }
 }
